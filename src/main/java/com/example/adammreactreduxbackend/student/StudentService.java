@@ -2,6 +2,7 @@ package com.example.adammreactreduxbackend.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,5 +40,16 @@ public class StudentService {
         };
         studentRepository.deleteById(idToDelete);
         return String.format("Successfully deleted student with id of %s", idToDelete);
+    }
+
+    //allows you not to have to write JDBA query to update the db record/row
+    //basically allows you to use the repository's .findById() returned Student object (JPA object)
+    //to call .setName(newName) and .setEmail(newEmail) setters to update the new values
+    @Transactional
+    public String updateStudent(String name, String email) {
+        System.out.println("name = " + name);
+        System.out.println("email = " + email);
+
+        return "Successfully updated student!";
     }
 }
