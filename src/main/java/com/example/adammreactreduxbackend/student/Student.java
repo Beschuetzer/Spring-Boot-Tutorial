@@ -2,6 +2,7 @@ package com.example.adammreactreduxbackend.student;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -19,6 +20,9 @@ public class Student {
     private Long id;
     private String name;
     private String email;
+
+    //indicates that this field doesn't need to be added to the table as a column
+    @Transient
     private Integer age;
     private LocalDate dob;
 
@@ -26,16 +30,14 @@ public class Student {
 
     }
 
-    public Student(String name, String email, LocalDate dob, Integer age) {
-        this(-1L, name, email, age, dob);
-
+    public Student(String name, String email, LocalDate dob) {
+        this(-1L, name, email, dob);
     }
 
-    public Student(Long id, String name, String email, LocalDate dob, Integer age) {
+    public Student(Long id, String name, String email, LocalDate dob) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.age = age;
         this.dob = dob;
     }
 
@@ -64,7 +66,7 @@ public class Student {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {

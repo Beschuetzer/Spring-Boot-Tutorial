@@ -13,12 +13,11 @@ public class AdamMReactReduxBackEndApplication {
         SpringApplication.run(AdamMReactReduxBackEndApplication.class, args);
     }
 
-    public static Student getStudent(Long id, String name, String email, LocalDate dob, Integer age) {
+    public static Student getStudent(Long id, String name, String email, LocalDate dob) {
         return new Student(
                 id,
                 name,
                 email,
-                age,
                 dob
         );
     }

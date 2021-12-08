@@ -18,6 +18,6 @@ public class StudentService {
     }
 
     public List<Student> getStudents() {
-        return List.of(null);
+        return studentRepository.findAll();
     }
 }
