@@ -1,9 +1,7 @@
 package com.example.adammreactreduxbackend.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,11 @@ public class StudentController {
     @GetMapping
     public List<Student> getStudents() {
         return this.studentService.getStudents();
+    }
+
+    @PostMapping
+    //@RequestBody tells springframework.web to map the body of the request to a Student object
+    public void addStudent(@RequestBody Student student) {
+        this.studentService.addStudent(student);
     }
 }
