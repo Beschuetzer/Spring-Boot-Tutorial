@@ -26,12 +26,12 @@ public class Student {
 
     }
 
-    public Student(String name, String email, Integer age, LocalDate dob) {
+    public Student(String name, String email, LocalDate dob, Integer age) {
         this(-1L, name, email, age, dob);
 
     }
 
-    public Student(Long id, String name, String email, Integer age, LocalDate dob) {
+    public Student(Long id, String name, String email, LocalDate dob, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;

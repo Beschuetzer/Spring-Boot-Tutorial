@@ -1,18 +1,23 @@
 package com.example.adammreactreduxbackend.student;
 
-import com.example.adammreactreduxbackend.AdamMReactReduxBackEndApplication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 //tells Spring boot that this class is injectable (is a "Spring Bean")
 @Service
 public class StudentService {
+    private final StudentRepository studentRepository;
+
+    //using dependency injection to auto-inject student repository into service
+    @Autowired
+    public StudentService(StudentRepository studentRepository) {
+        //this is an interface that extends JpaRepository
+        this.studentRepository = studentRepository;
+    }
+
     public List<Student> getStudents() {
-        return List.of(
-                AdamMReactReduxBackEndApplication.getStudent(1L, "Mariam", "mariam.jamal@gmail.com", LocalDate.of(2000, Month.JANUARY, 5), 21)
-        );
+        return List.of(null);
     }
 }
