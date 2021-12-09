@@ -38,6 +38,6 @@ public class StudentController {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String email
     ) {
-        return this.studentService.updateStudent(name, email);
+        return this.studentService.updateStudent(studentId, name, email);
     }
 }
