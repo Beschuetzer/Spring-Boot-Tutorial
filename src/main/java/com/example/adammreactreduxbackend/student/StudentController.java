@@ -17,14 +17,14 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudents() {
+    public List<StudentTest> getStudents() {
         return this.studentService.getStudents();
     }
 
     @PostMapping
     //@RequestBody tells springframework.web to map the body of the request to a Student object
-    public void addStudent(@RequestBody Student student) {
-        this.studentService.addStudent(student);
+    public void addStudent(@RequestBody StudentTest studentTest) {
+        this.studentService.addStudent(studentTest);
     }
 
     @DeleteMapping(path = "/{studentId}")

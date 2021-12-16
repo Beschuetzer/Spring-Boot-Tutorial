@@ -20,17 +20,17 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> getStudents() {
+    public List<StudentTest> getStudents() {
         return studentRepository.findAll();
     }
 
-    public void addStudent(Student student) {
-        Optional studentFound = studentRepository.findStudentByEmail(student.getEmail());
+    public void addStudent(StudentTest studentTest) {
+        Optional studentFound = studentRepository.findStudentByEmail(studentTest.getEmail());
         if (studentFound.isPresent()) {
             throw new IllegalStateException("Email taken");
         }
 
-        studentRepository.save(student);
+        studentRepository.save(studentTest);
     }
 
     public String deleteStudent(Long idToDelete) {
@@ -50,26 +50,29 @@ public class StudentService {
     //The way to trigger a rollback is to throw an exception
     @Transactional
     public String updateStudent(Long id, String name, String email) {
-        Student student = studentRepository.findStudentByEmailNativeNamedParameter(email)
+        System.out.println("email = " + email);
+        System.out.println("name = " + name);
+//        List<String> names = new ArrayList<String>(List.of("Adam", "Tom", "Mariam"));
+//        Integer result = studentRepository.insertStudent(name, email, LocalDate.of(2021, Month.JANUARY, 9));
+//        System.out.println("result = " + result);
+
+        StudentTest studentTest = studentRepository.findById(id)
                 .orElseThrow(() -> {
                     System.out.println("id = " + id);
                     return new IllegalStateException(String.format("There is no student with the id of %s.", id));
                 });
 
-        if (!name.equals(null) && name.length() > 0 && !Objects.equals(student.getName(), name)) {
-            student.setName(name);
+        if (!name.equals(null) && name.length() > 0 && !Objects.equals(studentTest.getName(), name)) {
+            studentTest.setName(name);
         }
 
-        if (!email.equals(null) && email.length() > 0 && !Objects.equals(student.getEmail(), email)) {
-            Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
+        if (!email.equals(null) && email.length() > 0 && !Objects.equals(studentTest.getEmail(), email)) {
+            Optional<StudentTest> studentOptional = studentRepository.findStudentByEmail(email);
             if (studentOptional.isPresent()) {
                 throw new IllegalStateException(String.format("The email %s is already taken.  Try another.", email));
             }
-            student.setEmail(email);
+            studentTest.setEmail(email);
         }
-
-        System.out.println("name = " + name);
-        System.out.println("email = " + email);
 
         return "Successfully updated student!";
     }

@@ -1,6 +1,6 @@
 package com.example.adammreactreduxbackend;
 
-import com.example.adammreactreduxbackend.student.Student;
+import com.example.adammreactreduxbackend.student.StudentTest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,8 +13,8 @@ public class AdamMReactReduxBackEndApplication {
         SpringApplication.run(AdamMReactReduxBackEndApplication.class, args);
     }
 
-    public static Student getStudent(Long id, String name, String email, LocalDate dob) {
-        return new Student(
+    public static StudentTest getStudent(Long id, String name, String email, LocalDate dob) {
+        return new StudentTest(
                 id,
                 name,
                 email,
